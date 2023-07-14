@@ -131,6 +131,16 @@ app.post("/api/persons", (request, response) => {
   response.json(person);
 });
 
+app.put("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  const body = request.body;
+  const newPersons = persons.map((number) =>
+    number.id !== id ? number : body
+  );
+  persons = newPersons;
+  response.json(body);
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
