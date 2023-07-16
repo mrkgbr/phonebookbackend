@@ -46,6 +46,19 @@ app.get("/api/persons", (request, response) => {
   });
 });
 
+app.get("/info", (request, response) => {
+  Person.find({}).then((persons) => {
+    const length = persons.length;
+    const date = new Date();
+    response.send(
+      `
+      <p>Phonebook has info for ${length} people</p>
+      ${date}
+      `
+    );
+  });
+});
+
 app.get("/api/persons/:id", (request, response, next) => {
   Person.findById(request.params.id)
     .then((person) => {
