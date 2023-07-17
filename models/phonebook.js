@@ -26,7 +26,7 @@ const personSchema = new mongoose.Schema({
     type: String,
     minLength: 8,
     validate: {
-      validator: function (v) {
+      validator(v) {
         // longer regex solution (commented out)
         // const pattern1 = /^\d{2}-\d{7}$/;
         // const pattern2 = /^\d{3}-\d{8}$/;

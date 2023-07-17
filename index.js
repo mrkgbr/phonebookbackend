@@ -1,7 +1,11 @@
+/* eslint-disable consistent-return */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable comma-dangle */
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+
 const app = express();
 const Person = require("./models/phonebook");
 
@@ -10,7 +14,7 @@ app.use(express.static("build"));
 app.use(express.json());
 
 app.use(
-  morgan(function (tokens, req, res) {
+  morgan((tokens, req, res) => {
     if (req.method === "POST") {
       const body = JSON.stringify(req.body);
       return [
@@ -122,7 +126,8 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === "CastError") {
     return response.status(400).send({ error: "malformatted id" });
-  } else if (error.name === "ValidationError") {
+  }
+  if (error.name === "ValidationError") {
     return response.status(400).json({ error: error.message });
   }
 
